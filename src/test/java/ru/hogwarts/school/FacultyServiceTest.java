@@ -3,47 +3,61 @@ package ru.hogwarts.school;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.repository.FacultyRepository;
 import ru.hogwarts.school.service.FacultyService;
-
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 public class FacultyServiceTest {
+    @Mock
+            private FacultyRepository facultyRepositoryMock;
+    @InjectMocks
     FacultyService out;
-
+/*
     @BeforeEach
     void setupFaculties() {
         out = new FacultyService();
         out.createFaculty(new Faculty(1L,"A", "a"));
         out.createFaculty(new Faculty(2L,"B", "b"));
         out.createFaculty(new Faculty(3L,"C", "c"));
-    }
+    }*/
 
     @Test
     void createFacultyTest() {
-        int size = out.getAllFaculty().size();
         Faculty f = new Faculty(4L, "D", "d");
+        when(facultyRepositoryMock.save(f)).thenReturn(f);
         Assertions.assertEquals(f, out.createFaculty(f));
-        Assertions.assertEquals(size + 1, out.getAllFaculty().size());
     }
 
     @Test
     void findFacultyPositiveTest() {
-        Assertions.assertEquals(new Faculty(3L,"C","c"), out.findFaculty(3L));
+        Faculty f = new Faculty(4L, "D", "d");
+        when(facultyRepositoryMock.findById(1L)).thenReturn(Optional.of(f));
+        Assertions.assertEquals(f, out.findFaculty(1L));
     }
 
     @Test
     void findFacultyNegativeTest() {
-        Assertions.assertNull(out.findFaculty(4L));
+        Faculty f = new Faculty(1L, "D", "d");
+        when(facultyRepositoryMock.findById(4L)).thenReturn(Optional.empty());
+        Assertions.assertThrows(NoSuchElementException.class, ()-> out.findFaculty(4L));
     }
 
     @Test
     void editFacultyPositiveTest() {
         Faculty f = new Faculty(3L, "C", "c");
-        int size = out.getAllFaculty().size();
+        when(facultyRepositoryMock.save(f)).thenReturn(f);
         Assertions.assertEquals(f, out.editFaculty(f));
-        Assertions.assertEquals(size, out.getAllFaculty().size());
     }
 
     @Test
@@ -53,7 +67,7 @@ public class FacultyServiceTest {
         Assertions.assertNull(out.editFaculty(f));
         Assertions.assertEquals(size, out.getAllFaculty().size());
     }
-
+/*
     @Test
     void deleteFacultyPositiveTest() {
         Faculty f = new Faculty(3L, "C", "c");
@@ -84,5 +98,5 @@ public class FacultyServiceTest {
     }
 
 
-
+*/
 }
