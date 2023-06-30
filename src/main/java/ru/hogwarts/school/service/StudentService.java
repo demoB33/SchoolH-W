@@ -36,17 +36,19 @@ public class StudentService {
     }
 
     public Collection<Student> findByAge(int age) {
-      /*  ArrayList<Student> result = new ArrayList<>();
-        for (Student student : students.values()) {
-            if (student.getAge() == age) {
-                result.add(student);
-            }
-        }
-        return result;
-       */
         return studentRepository.findAllByAge(age);
     }
     public Collection<Student> getAllStudent() {
         return studentRepository.findAll();
     }
+
+    public Collection<Student> findByAgeBetween(int ageMin, int ageMax) {
+        return studentRepository.findByAgeBetween(ageMin, ageMax);
+    }
+
+    public Student getStudents(long id) {
+        return studentRepository.findById(id).get();
+    }
+
+
 }
