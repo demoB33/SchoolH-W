@@ -28,7 +28,6 @@ public class AvatarService {
         this.avatarRepository = avatarRepository;
         this.studentRepository = studentRepository;
     }
-
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
         Student student = studentRepository.getById(studentId);
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(avatarFile.getOriginalFilename()));
