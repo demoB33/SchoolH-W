@@ -18,6 +18,8 @@ public class StudentController {
         this.studentService = studentService;
     }
 
+
+
     @GetMapping("/all")
     public ResponseEntity<Collection<Student>> getAllStudent() {
         return ResponseEntity.ok(studentService.getAllStudent());
@@ -41,7 +43,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Student>> findStudents(@RequestParam(required = false) int age){
+    public ResponseEntity<Collection<Student>> findStudentByAge(@RequestParam(required = false) int age){
         if (age > 0) {
             return ResponseEntity.ok(studentService.findByAge(age));
         }
@@ -49,7 +51,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
+    public ResponseEntity<Student> findStudentInfoById(@PathVariable Long id) {
         Student student = studentService.findStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -60,6 +62,7 @@ public class StudentController {
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
+
     @PutMapping
     public ResponseEntity<Student> editStudent(@RequestBody Student student) {
         Student student1 = studentService.editStudent(student);

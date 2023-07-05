@@ -1,4 +1,4 @@
-package ru.hogwarts.school;
+package ru.hogwarts.school.ServiceTest;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
