@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/course-four-lesson-three.sql
