@@ -1,7 +1,10 @@
 --liquibase formatted sql
 
 --changeset vasilenko:1
-CREATE INDEX IDX_students_name ON student (name);
+--rollback DROP INDEX idx_name_unique
+CREATE INDEX idx_name_unique ON student (name);
+
 
 --changeset vasilenko:2
-CREATE INDEX IDX_faculties_name_color ON faculty (color);
+--rollback DROP INDEX idx_name_color_unique
+CREATE INDEX idx_name_color_unique ON faculty (color, name);
