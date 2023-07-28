@@ -8,6 +8,7 @@ import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @RestController
 @RequestMapping("student")
@@ -78,7 +79,7 @@ public class StudentController {
     }
 
     @GetMapping("/name-start-with-A/{symbol}")
-    public Collection<Student> getBySymbol(@PathVariable("symbol") Character symbol) {
+    public List<String> getBySymbol(@PathVariable("symbol") Character symbol) {
         return studentService.getByFirstSymbol(symbol);
     }
 

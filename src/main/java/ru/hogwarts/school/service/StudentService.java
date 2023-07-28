@@ -2,19 +2,15 @@ package ru.hogwarts.school.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
-import ru.hogwarts.school.model.StudentByCategory;
 import ru.hogwarts.school.repository.StudentRepository;
-import java.util.ArrayList;
+
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class StudentService {
@@ -83,12 +79,14 @@ public class StudentService {
     // Добавить эндпоинт для получения всех имен всех студентов, чье имя начинается с буквы А.
     // В ответе должен находиться отсортированный в алфавитном порядке список с именами в верхнем регистре.
     // Для получения всех студентов из базы использовать метод репозитория - findAll().
-    public Collection<Student> getByFirstSymbol(char symbol) {
+    public List<String> getByFirstSymbol(Character symbol) {
         return studentRepository.findAll().stream()
-                .filter(student -> student.getName().charAt(0) == symbol)
+                .map(student -> student.getName().toUpperCase())
+                .filter(name ->name.charAt(0) == symbol)
                 .sorted()
                 .collect(Collectors.toList());
     }
+
 
     // Создать эндпоинт, который будет возвращать средний возраст всех студентов.
     // Для получения информации о всех студентах опять же следует использовать метод репозитория - findAll().

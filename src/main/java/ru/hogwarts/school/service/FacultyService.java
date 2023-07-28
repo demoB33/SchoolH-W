@@ -78,8 +78,8 @@ public class FacultyService {
     public String longestFacultyName() {
         return facultyRepository.findAll().stream()
                 .map(Faculty::getName)
-                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder()))
-                .findFirst().get();
+                .max(Comparator.comparing(String::length))
+                .get();
     }
 
     //Создать эндпоинт (не важно в каком контроллере),
