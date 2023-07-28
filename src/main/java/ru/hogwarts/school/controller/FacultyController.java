@@ -75,5 +75,21 @@ public class FacultyController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/get-longest-faculty-name")
+    public String longestFacultyName() {
+        return facultyService.longestFacultyName();
+    }
+
+    //Создать эндпоинт (не важно в каком контроллере),
+    // который будет возвращать целочисленное значение.
+    // Это значение вычисляется следующей формулой:
+    // int sum = Stream.iterate(1, a -> a +1) .limit(1_000_000) .reduce(0, (a, b) -> a + b );
+
+    @GetMapping("/computed-integer-value")
+    public Integer computedIntegerValue() {
+        return facultyService.computedIntegerValue();
+    }
+
 }
+
 

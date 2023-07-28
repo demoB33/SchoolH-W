@@ -77,5 +77,15 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/name-start-with-A/{symbol}")
+    public Collection<Student> getBySymbol(@PathVariable("symbol") Character symbol) {
+        return studentService.getByFirstSymbol(symbol);
+    }
+
+    @GetMapping("/average-age-all-students")
+    public Double getAverageAgeAllStudent() {
+        return studentService.getAverageAgeAllStudent();
+    }
+
 
 }

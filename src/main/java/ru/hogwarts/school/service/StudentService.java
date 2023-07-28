@@ -80,4 +80,23 @@ public class StudentService {
         return studentRepository.getLastStudent(count);
     }
 
+    // Добавить эндпоинт для получения всех имен всех студентов, чье имя начинается с буквы А.
+    // В ответе должен находиться отсортированный в алфавитном порядке список с именами в верхнем регистре.
+    // Для получения всех студентов из базы использовать метод репозитория - findAll().
+    public Collection<Student> getByFirstSymbol(char symbol) {
+        return studentRepository.findAll().stream()
+                .filter(student -> student.getName().charAt(0) == symbol)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    // Создать эндпоинт, который будет возвращать средний возраст всех студентов.
+    // Для получения информации о всех студентах опять же следует использовать метод репозитория - findAll().
+
+    public double getAverageAgeAllStudent() {
+        return studentRepository.findAll().stream()
+                .mapToInt(Student::getAge)
+                .average()
+                .orElse(0.0);
+    }
 }
