@@ -88,5 +88,13 @@ public class StudentController {
         return studentService.getAverageAgeAllStudent();
     }
 
+    @GetMapping("/name-students-thread")
+    public void getStudentsWithThread() {
+       studentService.getStudentsWithThread();
+    }
+    @GetMapping("/name-students-thread-synchronized")
+    public void getStudentsWithThreadSynchronized() {
+       studentService.getStudentsWithThreadSynchronized();
+    }
 
 }
